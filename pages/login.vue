@@ -61,6 +61,13 @@
           Cancel
         </button>
       </div>
+      <div class="register-link">
+        <NuxtLink to="/register?redirect=/login">
+          <span class="has-text-grey-light">
+            Don't have an account? Register here.
+          </span>
+        </NuxtLink>
+      </div>
     </div>
   </div>
 </template>
@@ -145,6 +152,13 @@ const forgotPassword = () => {
 
       .buttons {
         margin-top: 10px;
+        display: flex;
+        justify-content: center;
+
+        button {
+          width: 40%;
+          font-weight: bold;
+        }
 
         #login-btn {
           background: #EF233C;
@@ -154,6 +168,12 @@ const forgotPassword = () => {
             background: #D90429;
           }
         }
+      }
+
+      .register-link {
+        margin: -15px 0px -15px 0px;
+        display: flex;
+        justify-content: center;
       }
     }
   }
