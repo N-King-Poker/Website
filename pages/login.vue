@@ -62,7 +62,7 @@
         </button>
       </div>
       <div class="register-link">
-        <NuxtLink to="/register?redirect=/login">
+        <NuxtLink :to="'/register?redirect=' + redirect">
           <span class="has-text-grey-light">
             Don't have an account? Register here.
           </span>
