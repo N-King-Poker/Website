@@ -200,13 +200,13 @@ const register = async () => {
     }
   } else {
     useUser().value = user.user
-    router.push(redirect.value)
+    router.push(redirect.value === '/login' ? '/' : redirect.value)
   }
 }
 
 const cancel = () => {
   const router = useRouter()
-  router.push('/')
+  router.push(redirect.value)
 }
 
 </script>
