@@ -97,7 +97,7 @@
 
 <script setup>
 
-import {createUser, signIn} from '~/composables/useAuth'
+import { createUser } from '~/composables/useAuth'
 
 definePageMeta({
   title: 'Login',
