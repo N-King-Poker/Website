@@ -1,10 +1,10 @@
 <template>
   <nav id="navbar-container" class="level is-mobile">
-    <div class="level-left">
+    <NuxtLink class="level-left" to="/">
       <figure id="logo" class="image">
         <img src="~/assets/logo.png" alt="logo">
       </figure>
-      <span id="title">
+      <span v-if="!isMobile" id="title">
         <span>N</span>
         <span>-</span>
         <span>K</span>
@@ -12,8 +12,8 @@
         <span>N</span>
         <span>G</span>
       </span>
-    </div>
-    <div class="level-item has-text-centered">
+    </NuxtLink>
+    <div v-if="!isMobile" class="level-item has-text-centered">
       <nuxt-link class="nav-link" to="/statistics">
         Statistics
       </nuxt-link>
@@ -26,7 +26,7 @@
         Friends
       </nuxt-link>
     </div>
-    <div class="level-right">
+    <div id="account-item" class="level-right">
       <div v-if="!user" id="log-buttons" class="buttons">
         <nuxt-link id="login-button" to="/login" class="button">
           <strong>Log in</strong>
@@ -35,13 +35,67 @@
           Sign up
         </nuxt-link>
       </div>
+      <div v-else>
+        <div id="account-dropdown" class="dropdown is-hoverable is-right">
+          <div id="account-trigger" class="dropdown-trigger">
+            <span class="icon-text " aria-haspopup="true" aria-controls="dropdown-menu">
+              <span class="icon">
+                <i class="fas fa-angle-down" aria-hidden="true" />
+              </span>
+              <span v-if="!isMobile" id="account-name">{{ user.username }}</span>
+            </span>
+            <figure id="account-figure" class="image">
+              <img id="account-image" :src="user.avatar" class="is-rounded" alt="account">
+            </figure>
+          </div>
+          <div id="dropdown-menu" class="dropdown-menu" role="menu">
+            <div class="dropdown-content">
+              <NuxtLink href="#" class="dropdown-item">
+                <span class="icon-text">
+                  <span class="icon">
+                    <i class="fas fa-user" aria-hidden="true" />
+                  </span>
+                  <span>Profile</span>
+                </span>
+              </NuxtLink>
+              <NuxtLink href="#" class="dropdown-item">
+                <span class="icon-text">
+                  <span class="icon">
+                    <i class="fas fa-cog" aria-hidden="true" />
+                  </span>
+                  <span>Settings</span>
+                </span>
+              </NuxtLink>
+              <hr class="dropdown-divider">
+              <a class="dropdown-item icon-text">
+                <span class="icon">
+                  <i class="fas fa-sign-out-alt" aria-hidden="true" />
+                </span>
+                <span>Log out</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </nav>
 </template>
 
 <script setup>
 
-const user = ref(null)
+const user = ref({
+  username: 'RenardFute',
+  email: 'renardfute@staff.n-king.com',
+  avatar: 'https://avatars.githubusercontent.com/u/10262924?v=4'
+})
+
+const isMobile = ref(false)
+
+onMounted(() => {
+  window.addEventListener('resize', () => {
+    isMobile.value = window.innerWidth < 768
+  })
+})
 
 </script>
 
@@ -73,11 +127,15 @@ const user = ref(null)
           color: #EF233C;
           transform: translateY(0);
         }
-        25% {
+        10% {
           color: #EDF2F4;
-          transform: translateY(-0.5rem);
+          transform: translateY(-0.2rem);
         }
-        50% {
+        20% {
+          color: darken(#EF233C, 10);
+          transform: translateY(0);
+        }
+        100% {
           color: #EF233C;
           transform: translateY(0);
         }
@@ -85,7 +143,7 @@ const user = ref(null)
 
       span {
         display: inline-block;
-        animation: wave 5s infinite;
+        animation: wave 5s infinite ease-in-out;
       }
 
       span:nth-child(1) {
@@ -129,31 +187,68 @@ const user = ref(null)
       margin: 0.2rem 0.5rem;
     }
 
-    #log-buttons {
-      .button {
-        background-color: #EF233C;
-        border-radius: 0.25rem;
-        border-color: transparent;
-        color: #EDF2F4;
-        font-size: 1.05rem;
-        font-weight: 600;
-        padding: 0.5rem 0.75rem;
-        transition: all 0.2s ease-in-out;
-        width: 6rem;
+    #account-item {
+      width: 15rem;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
 
-        &:hover {
+      #log-buttons {
+        .button {
+          background-color: #EF233C;
+          border-radius: 0.25rem;
+          border-color: transparent;
+          color: #EDF2F4;
+          font-size: 1.05rem;
+          font-weight: 600;
+          padding: 0.5rem 0.75rem;
+          transition: all 0.2s ease-in-out;
+          width: 6rem;
+
+          &:hover {
+            background-color: transparent;
+            color: #EF233C;
+          }
+        }
+
+        #login-button {
           background-color: transparent;
-          color: #EF233C;
+        }
+
+        #register-button:hover {
+          background-color: #D90429;
+          color: #EDF2F4;
         }
       }
 
-      #login-button {
-        background-color: transparent;
-      }
+      #account-dropdown {
+        #account-trigger {
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          margin-right: 0.5rem !important;
+          width: 100%;
+          object-fit: contain;
+          height: 2.5rem;
 
-      #register-button:hover {
-        background-color: #D90429;
-        color: #EDF2F4;
+          #account-figure {
+            margin-left: 0.5rem;
+            height: 2.5rem;
+            width: 2.5rem;
+            object-fit: cover;
+
+            #account-image {
+              margin-left: 0.5rem;
+              object-fit: cover;
+            }
+          }
+
+          .icon-text {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #EDF2F4;
+          }
+        }
       }
     }
 
