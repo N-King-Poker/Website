@@ -1,4 +1,4 @@
-import errorMessages from "~/composables/errorCode.json"
+import errorMessages from '~/composables/errorCode.json'
 export const getErrorMessage = (code: string) => {
   for (const key in errorMessages) {
     if (key === code) {

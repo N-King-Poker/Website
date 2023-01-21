@@ -1,32 +1,35 @@
 <template>
-  <div class="center has-background-light">
-    <div class="has-text-centered">
-      <progress class="progress is-small is-danger" max="100">
-        0
-      </progress>
-      <p class="title is-2">
-        An error occurred
-      </p>
-      <p class="title is-1">
-        - {{ error.statusCode }} -
-      </p>
-      <p class="subtitle is-3">
-        {{ getErrorMessage(error.statusCode) }}
-      </p>
-      <div class="is-3">
+  <div>
+    <nav-bar />
+    <div class="center has-background-light">
+      <div class="has-text-centered">
         <progress class="progress is-small is-danger" max="100">
           0
         </progress>
+        <p class="title is-2">
+          An error occurred
+        </p>
+        <p class="title is-1">
+          - {{ error.statusCode }} -
+        </p>
+        <p class="subtitle is-3">
+          {{ getErrorMessage(error.statusCode) }}
+        </p>
+        <div class="is-3">
+          <progress class="progress is-small is-danger" max="100">
+            0
+          </progress>
+        </div>
+        <NuxtLink class="button margin light_red is-inverted" to="/">
+          Home Page
+        </NuxtLink>
       </div>
-      <NuxtLink class="button margin light_red is-inverted" to="/">
-        Home Page
-      </NuxtLink>
     </div>
   </div>
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
   error: {
     type: Object,
     default: null
