@@ -83,11 +83,7 @@
 
 <script setup>
 
-const user = ref({
-  username: 'RenardFute',
-  email: 'renardfute@staff.n-king.com',
-  avatar: 'https://avatars.githubusercontent.com/u/10262924?v=4'
-})
+const user = ref(null)
 
 const isMobile = ref(false)
 
