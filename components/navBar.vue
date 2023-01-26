@@ -100,6 +100,7 @@ onMounted(() => {
     background-color: #2B2D42;
     color: #EDF2F4;
     padding: 0.5rem 1rem;
+    margin-bottom: 0;
     height: 3.5rem;
 
     #logo {
