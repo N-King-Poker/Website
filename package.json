@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "doppler run -- nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
@@ -15,6 +15,7 @@
   "dependencies": {
     "@nuxtjs/eslint-config-typescript": "^12.0.0",
     "eslint": "^8.32.0",
+    "firebase": "^9.15.0",
     "sass": "^1.57.1",
     "sass-loader": "^13.2.0"
   }
